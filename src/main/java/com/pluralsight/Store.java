@@ -1,5 +1,8 @@
 package com.pluralsight;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,9 +16,10 @@ import java.util.Scanner;
  * You will need extra imports (for example java.io.BufferedReader,
  * java.io.FileReader, java.io.IOException) as you fill the TODOs in.
  */
-public class Store {
+public class Store { ;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
+        BufferedReader storeReader = new BufferedReader(new FileReader("products.csv"));
 
         // Create lists for inventory and the shopping cart
         ArrayList<Product> inventory = new ArrayList<>();
@@ -111,4 +115,3 @@ public class Store {
         return null;
     }
 }
- 
