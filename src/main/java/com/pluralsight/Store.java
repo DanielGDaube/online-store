@@ -6,27 +6,21 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * Starter code for the Online Store workshop.
- * Learners will complete the TODO sections to make the program work.
- * <p>
- * What is already done for you: the two lists, the Home Screen loop and
- * the method headers. Each TODO says what that method has to do.
- * Product.java is complete; products.csv sits at the project root.
- * You will need extra imports (for example java.io.BufferedReader,
- * java.io.FileReader, java.io.IOException) as you fill the TODOs in.
- */
-public class Store { ;
+
+public class Store {
 
     public static void main(String[] args) throws FileNotFoundException {
-        BufferedReader storeReader = new BufferedReader(new FileReader("products.csv"));
 
         // Create lists for inventory and the shopping cart
         ArrayList<Product> inventory = new ArrayList<>();
         ArrayList<Product> cart = new ArrayList<>();
 
+
         // Load inventory from the data file (pipe-delimited: SKU|Product Name|Price|Department)
         loadInventory("products.csv", inventory);
+
+
+
 
         // Main menu loop
         Scanner scanner = new Scanner(System.in);
@@ -56,17 +50,27 @@ public class Store { ;
         scanner.close();
     }
 
-    /**
-     * Reads product data from a file and populates the inventory list.
-     * File format (pipe-delimited), the first line is a header row:
-     * SKU|Product Name|Price|Department
-     * <p>
-     * Example line:
-     * AV1051|JBL Bluetooth Speaker|89.95|Audio Video
-     */
     public static void loadInventory(String fileName, ArrayList<Product> inventory) {
-        // TODO: skip the header line, then read each line, split on "|",
-        //       create a Product object, and add it to the inventory list
+        try {
+            BufferedReader storeReader = new BufferedReader(new FileReader(fileName));
+
+            storeReader.readLine();
+
+            String line;
+
+            while ((line = storeReader.readLine()) != null) {
+                String[] tokens = line.split("\\|");
+                String sku = tokens[0];
+                String name = tokens[1];
+                double price = Double.parseDouble(tokens[2]);
+                String department = tokens[3];
+                inventory.add(new Product(sku, name, price, department));
+            }
+
+        }
+        catch (Exception e){
+
+        }
     }
 
     /**
@@ -78,6 +82,10 @@ public class Store { ;
                                        Scanner scanner) {
         // TODO: show each product (id, name, price),
         //       prompt for an id, find that product, add to cart
+        for (Product product : inventory){
+            System.out.println(product);
+
+        }
     }
 
     /**

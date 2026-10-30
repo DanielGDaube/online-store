@@ -1,16 +1,16 @@
 package com.pluralsight;
 
 public class Product {
-    private int sku;
+    private String sku;
     private String name;
     private double price;
     private String department;
 
-    public int getSku() {
+    public String getSku() {
         return sku;
     }
 
-    public Product setSku(int sku) {
+    public Product setSku(String sku) {
         this.sku = sku;
         return this;
     }
@@ -42,7 +42,7 @@ public class Product {
         return this;
     }
 
-    public Product(int sku, String name, double price, String department) {
+    public Product(String sku, String name, double price, String department) {
         this.sku = sku;
         this.name = name;
         this.price = price;
