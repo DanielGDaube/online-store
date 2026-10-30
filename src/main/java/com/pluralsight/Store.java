@@ -97,13 +97,20 @@ public class Store {
             choice = scanner.nextLine();
             searchProduct = findProductById(choice, inventory);
 
-            while (!choiceYesNo.equalsIgnoreCase("no") && !choiceYesNo.equalsIgnoreCase("yes") && !choice.equalsIgnoreCase("x")) {
-                System.out.println("\nWould you like to add this item to your cart?\n");
-                System.out.println("Yes - Add item to cart\nNo - Search for different item");
-                choiceYesNo = scanner.nextLine();
-                if (choiceYesNo.equalsIgnoreCase("yes")) {
-                    cart.add(searchProduct);
-                    System.out.println("Item has been added to your cart");
+            if (searchProduct == null && !choice.equalsIgnoreCase("x")){
+                System.err.println("Invalid ID! Try again");
+            }
+            else {
+
+                // Prompt the user for yes or no, yes adds item to cart, no returns to previous prompt
+                while (!choiceYesNo.equalsIgnoreCase("no") && !choiceYesNo.equalsIgnoreCase("yes") && !choice.equalsIgnoreCase("x")) {
+                    System.out.println("\nWould you like to add this item to your cart?\n");
+                    System.out.println("Yes - Add item to cart\nNo - Search for different item");
+                    choiceYesNo = scanner.nextLine();
+                    if (choiceYesNo.equalsIgnoreCase("yes")) {
+                        cart.add(searchProduct);
+                        System.out.println("Item has been added to your cart");
+                    }
                 }
             }
         }
