@@ -48,4 +48,9 @@ public class Product {
         this.price = price;
         this.department = department;
     }
+    @Override
+    public String toString(){
+        return sku + " | " + name + " - $" + price;
+
+    }
 }

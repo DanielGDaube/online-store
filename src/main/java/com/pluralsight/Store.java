@@ -70,6 +70,7 @@ public class Store {
         }
         catch (Exception e){
 
+
         }
     }
 
@@ -80,12 +81,30 @@ public class Store {
     public static void displayProducts(ArrayList<Product> inventory,
                                        ArrayList<Product> cart,
                                        Scanner scanner) {
-        // TODO: show each product (id, name, price),
+
         //       prompt for an id, find that product, add to cart
         for (Product product : inventory){
             System.out.println(product);
-
         }
+        String choice = "";
+
+        while (!choice.equalsIgnoreCase("x")) {
+            int startCartSize = cart.size();
+
+            System.out.println("Enter item ID to add to cart, or press X to return to the main menu");
+            choice = scanner.nextLine();
+
+            for (Product product : inventory){
+                if (product.getSku().equals(choice)){
+                    cart.add(product);
+                    System.out.println("Item has been added to your cart");
+                }
+            }
+            if (cart.size() == startCartSize && !choice.equalsIgnoreCase("x")){
+                System.err.println("Invalid ID");
+            }
+        }
+
     }
 
     /**
