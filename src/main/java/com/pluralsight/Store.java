@@ -122,11 +122,25 @@ public class Store {
      * and offers the option to check out.
      */
     public static void displayCart(ArrayList<Product> cart, Scanner scanner) {
-        // TODO:
-        //   • list each product in the cart
-        //   • compute the total cost
-        //   • ask the user whether to check out (C) or return (X)
-        //   • if C, call checkOut(cart, totalAmount, scanner)
+        String choice = "";
+        double totalAmount = 0.0;
+        for (Product product : cart){
+            System.out.println(product);
+            totalAmount += product.getPrice();
+        }
+        System.out.println("Cart Total: $" + totalAmount);
+
+        while (!choice.equalsIgnoreCase("x")) {
+            System.out.println("Press C to check out\nPress X to return the main menu");
+            choice = scanner.nextLine();
+            switch (choice.toLowerCase()) {
+                case "c" -> checkOut(cart, totalAmount, scanner);
+                case "x" -> {}
+                default -> System.err.println("Invalid input!");
+
+            }
+        }
+
     }
 
     /**
