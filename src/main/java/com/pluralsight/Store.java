@@ -1,7 +1,7 @@
 package com.pluralsight;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
+
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Store {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args)  {
 
         // Create lists for inventory and the shopping cart
         ArrayList<Product> inventory = new ArrayList<>();
@@ -69,8 +69,7 @@ public class Store {
 
         }
         catch (Exception e){
-
-
+            System.err.println("Something went wrong!");
         }
     }
 
@@ -153,7 +152,32 @@ public class Store {
     public static void checkOut(ArrayList<Product> cart,
                                 double totalAmount,
                                 Scanner scanner) {
-        // TODO: implement steps listed above
+        double payment;
+        double change;
+        System.out.println("Do you want to continue with the purchase? (yes/no)");
+        if (scanner.nextLine().equalsIgnoreCase("yes")){
+            System.out.print("Your total is: $" + totalAmount + "\nPlease enter payment amount:");
+            payment = scanner.nextDouble();
+            change = payment - totalAmount;
+            if (change < 0){
+                System.err.println("Insufficient payment. Please enter a valid amount");
+            }
+            // Receipt displays all purchased items, total cost, payment amount, and any leftover change
+            else {
+                System.out.println("Thank you for your purchase!");
+                System.out.println("-----RECEIPT-----");
+                for (Product product : cart){
+                    System.out.println(product);
+                }
+                System.out.println("Total amount: $" + totalAmount);
+                System.out.println("You paid: $" + payment);
+                if (change > 0){
+                    System.out.println("Here is your change: $" + change);
+                }
+                cart.clear();
+            }
+
+        }
     }
 
     /**
