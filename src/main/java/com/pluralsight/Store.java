@@ -88,20 +88,23 @@ public class Store {
         }
         String choice = "";
 
+        Product searchProduct;
+
         while (!choice.equalsIgnoreCase("x")) {
-            int startCartSize = cart.size();
+            String choiceYesNo = "";
 
-            System.out.println("Enter item ID to add to cart, or press X to return to the main menu");
+            System.out.println("Enter item ID to search for item, or press X to return to the main menu");
             choice = scanner.nextLine();
+            searchProduct = findProductById(choice, inventory);
 
-            for (Product product : inventory){
-                if (product.getSku().equals(choice)){
-                    cart.add(product);
+            while (!choiceYesNo.equalsIgnoreCase("no") && !choiceYesNo.equalsIgnoreCase("yes") && !choice.equalsIgnoreCase("x")) {
+                System.out.println("\nWould you like to add this item to your cart?\n");
+                System.out.println("Yes - Add item to cart\nNo - Search for different item");
+                choiceYesNo = scanner.nextLine();
+                if (choiceYesNo.equalsIgnoreCase("yes")) {
+                    cart.add(searchProduct);
                     System.out.println("Item has been added to your cart");
                 }
-            }
-            if (cart.size() == startCartSize && !choice.equalsIgnoreCase("x")){
-                System.err.println("Invalid ID");
             }
         }
 
@@ -138,7 +141,15 @@ public class Store {
      * @return the matching Product, or null if not found
      */
     public static Product findProductById(String id, ArrayList<Product> inventory) {
-        // TODO: loop over the list and compare ids
-        return null;
+        Product searchProduct = null;
+
+        for (Product product : inventory){
+            if (product.getSku().equals(id)){
+                System.out.println(product);
+                searchProduct = product;
+
+            }
+        }
+        return searchProduct;
     }
 }
