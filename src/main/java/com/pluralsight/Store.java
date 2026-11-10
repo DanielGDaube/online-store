@@ -123,18 +123,44 @@ public class Store {
     public static void displayCart(ArrayList<Product> cart, Scanner scanner) {
         boolean found = false;
         String choice = "";
-
         double totalAmount = 0.0;
-        for (Product product : cart){
-            System.out.println(product);
+        int index = 0;
+
+        for (Product product : cart) {
+            boolean printed = false;
+            int quantity = 0;
+            int previousIndex = 0;
+
+            for (Product previous : cart) {
+
+                if (previous.getSku().equals(product.getSku())) {
+                    quantity++;
+
+                    if (previousIndex < index) {
+                        printed = true;
+                    }
+                }
+                previousIndex++;
+            }
+
+            if (!printed) {
+                if (quantity > 1) {
+                    System.out.println(product + " X" + quantity);
+                } else {
+                    System.out.println(product);
+                }
+            }
+            index++;
+
             totalAmount += product.getPrice();
             found = true;
+
         }
         if (!found){
             System.out.println("Cart is empty");
         }
         else {
-        System.out.println("Cart Total: $" + totalAmount);
+        System.out.printf("Cart Total: $%.2f %n", totalAmount);
 
         while (!choice.equalsIgnoreCase("x")) {
             System.out.println("Press C to check out\nPress X to return the main menu");
