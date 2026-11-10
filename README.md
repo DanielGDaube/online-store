@@ -1,4 +1,5 @@
-# Project Title
+# Online Store
+program that reads products off of a csv file and lets users shop for them
 
 <!-- HOW TO USE THIS TEMPLATE
      Save it as README.md at the root of your project, next to pom.xml. Replace every comment like this one
@@ -10,7 +11,9 @@
      Example: A console app that keeps a store's inventory in a csv file and lets a clerk search it. -->
 
 ## Description of the Project
-
+Online store is an application for customers to shop for products. Users can view all available
+products, select products by ID, and add them to their cart. Users can then view their cart and
+checkout from the store,
 <!-- Three to five sentences. What the application does, who uses it, what problem it solves.
      Write it for someone who has never seen the workbook: a recruiter, a classmate, you in six months. -->
 
@@ -24,9 +27,10 @@
      - Shows every product in the store
      - Searches products by name (bonus) -->
 
--
--
--
+- Shows every product in the store
+- Adds products to cart
+- Shows every product in cart
+- Calculates total cost of cart
 
 ## User Stories
 
@@ -61,7 +65,7 @@
      - `inventory.csv` sits at the project root, next to `pom.xml`. The program reads it at start.
      - `logs.txt` is created by the program at the project root on the first run. -->
 
--
+- `products.csv` sits at the project root, next to `pom.xml`. The program reads it at start.
 
 ## Technologies Used
 
@@ -86,7 +90,7 @@
 
 ![Main menu](images/menu.png)
 
-![One feature in action](images/feature.png)
+![One feature in action](images/cart.png)
 
 ## A piece of code I am proud of
 
@@ -95,31 +99,60 @@
      demo day and what you talk about in an interview. -->
 
 ```java
+int index = 0;
 
+        for (Product product : cart) {
+            boolean printed = false;
+            int quantity = 0;
+            int previousIndex = 0;
+
+            for (Product previous : cart) {
+
+                if (previous.getSku().equals(product.getSku())) {
+                    quantity++;
+
+                    if (previousIndex < index) {
+                        printed = true;
+                    }
+                }
+                previousIndex++;
+            }
+
+            if (!printed) {
+                if (quantity > 1) {
+                    System.out.println(product + " X" + quantity);
+                } else {
+                    System.out.println(product);
+                }
+            }
+            index++;
 ```
+This code prevents duplicate products in the cart from printing multiple times. I wrote
+it to check if a product appears in the cart more than once and if it does it will only
+print once with a number displaying how many times it appears in the cart.
 
 ## Future Work
 
 <!-- What you would add or fix next, one bullet each. Unfinished bonuses belong here. -->
 
--
--
+- (bonus) print the receipt to a csv file
+
 
 ## Resources
 
 <!-- What helped you: the workbook, the week's hub pages, a tutorial, a documentation page. Real links. -->
 
 - Java YearUp Fall 2026 hub: <https://raymaroun.github.io/yearup-java-fall2026/>
--
+- Visual Hub: <https://raymaroun.github.io/yearup-java-fall2026/week-03/index.html>
 
 ## Author
 
 <!-- Your name and, if you like, your GitHub profile link. For a team workshop, one line per person with what each one built. -->
 
-- **Your Name**
+- **Daniel Daube**
 
 ## Thanks
 
 <!-- Optional. The people who helped: the instructor, a classmate who debugged with you, a mentor. -->
 
-- Thank you to ... for ...
+- Thank you to Raymond for being a great instructor
