@@ -50,7 +50,7 @@ public class Product {
     }
     @Override
     public String toString(){
-        return sku + " | " + name + " - $" + price;
+        return String.format("%s | %s | $%.2f | %s", sku, name, price, department);
 
     }
 }
